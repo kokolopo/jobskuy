@@ -34,7 +34,7 @@ include "layout/header.php";
 <?php if (!empty($_GET['id'])) { ?>
 	<?php
 	extract($_GET);
-	$k = mysql_query("SELECT produk.*, user.nama as freelancer, user.email, user.telephone
+	$k = mysql_query("SELECT produk.*, user.nama as freelancer, user.email, user.telephone, user.skills
 	FROM produk
 	LEFT JOIN user ON produk.user_id = user.id
 	WHERE produk.id='$id'");
@@ -65,9 +65,10 @@ include "layout/header.php";
 				<h3>About Poster : </h3>
 				<br />
 				<div class="col-md-12 content-menu" style="margin-top:-20px;margin-bottom: 10px;">
-					<h4>Posting By : <?php echo $data['freelancer'] ?></h4>
-					<h4>Email : <?php echo $data['email'] ?></h4>
-					<h4>Phone : <?php echo $data['telephone'] ?></h4>
+					<h5>Posting By : <?php echo $data['freelancer'] ?></h5>
+					<h5>Email : <?php echo $data['email'] ?></h5>
+					<h5>Phone : <?php echo $data['telephone'] ?></h5>
+					<h5>Skills : <?php echo $data['skills'] ?></h5>
 				</div>
 
 
