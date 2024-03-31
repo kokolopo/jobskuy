@@ -34,7 +34,10 @@ include "layout/header.php";
 <?php if (!empty($_GET['id'])) { ?>
 	<?php
 	extract($_GET);
-	$k = mysql_query("SELECT * FROM produk where id='$id'");
+	$k = mysql_query("SELECT produk.*, user.nama as freelancer, user.email, user.telephone
+	FROM produk
+	LEFT JOIN user ON produk.user_id = user.id
+	WHERE produk.id='$id'");
 	$data = mysql_fetch_array($k);
 	?>
 
@@ -57,6 +60,14 @@ include "layout/header.php";
 					<p>
 						<a href="<?php echo $url; ?>keranjang.php?act=beli&&produk_id=<?php echo $data['id'] ?>" class="btn btn-info" href="#" role="button">Pesan</a>
 					</p>
+				</div>
+
+				<h3>About Poster : </h3>
+				<br />
+				<div class="col-md-12 content-menu" style="margin-top:-20px;margin-bottom: 10px;">
+					<h4>Posting By : <?php echo $data['freelancer'] ?></h4>
+					<h4>Email : <?php echo $data['email'] ?></h4>
+					<h4>Phone : <?php echo $data['telephone'] ?></h4>
 				</div>
 
 

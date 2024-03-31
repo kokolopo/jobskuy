@@ -11,9 +11,6 @@ if (!empty($_POST)) {
 	extract($_POST);
 	$password = md5($password);
 	$q = mysql_query("SELECT * FROM `user` WHERE email='$email' AND password='$password'") or die(mysql_error());
-	if (!mysql_fetch_object($q)) {
-		alert("Maaf email dan password anda salah");
-	}
 	if ($q) {
 		$r = mysql_fetch_object($q);
 		if ($r->status == 'freelance') { // Memeriksa status user
@@ -23,6 +20,9 @@ if (!empty($_POST)) {
 			$_SESSION['iam_user'] = $r->id;
 			redir("index.php"); // Redirect ke halaman homepage biasa jika bukan user freelance
 		}
+	}
+	if (!mysql_fetch_object($q)) {
+		alert("Maaf email dan password anda salah");
 	}
 }
 
